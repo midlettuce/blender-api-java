@@ -42,6 +42,7 @@ public class BaseXmlApi {
 		httpClient = new HttpClient();
 		httpClient.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
 				new DefaultHttpMethodRetryHandler(maxRetries, true));
+		httpClient.getParams().setParameter("http.protocol.content-charset", "UTF-8");
 
 	}
 
@@ -99,6 +100,7 @@ public class BaseXmlApi {
 	protected XMLResponseWrapper httpPost(String urlPart, String xml) throws IOException, JAXBException {
 		String url = getUrl(urlPart);		
 		PostMethod method = new PostMethod(url);
+		method.addRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 		method.setParameter("xml", xml);
 
 //		System.out.println("POST request: " + url + "\n" + xml);
